@@ -1,0 +1,39 @@
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit()">
+    <input type="hidden" name="taskID"
+    [value]="service.formData.taskID" />
+    <input type="hidden" name="lastExecution"
+    [value]="service.formData.lastExecution" />
+    <input type="hidden" name="userName"
+    [value]="service.formData.userName" />
+    <div class="row mx-1">
+        <div class="form-group col">
+            <label>TASK TYPE</label><br>
+            <select name="taskType" #taskType="ngModel" [(ngModel)]="service.formData.taskType" (ngModelChange)="onTaskSelected($event)" style="font-size: 30px;">
+                <option style="font-size: 30px;" *ngFor="let api of task.apis" value="{{api.type}}">{{api.name}}</option>
+            </select>
+        </div>
+        <div class="form-group col">
+            <label>{{this.task.chosenType}}</label>
+            <input class="form-control form-control-lg" placeholder="parameter" style="width: 200px;"
+            name="taskParameter" #taskParameter="ngModel" [(ngModel)]="service.formData.taskParameter" required>
+        </div>
+        <div class="form-group col">
+            <label>TASKNAME</label>
+            <input class="form-control form-control-lg" placeholder="taskname" style="width: 400px;"
+            name="taskName" #taskName="ngModel" [(ngModel)]="service.formData.taskName" required>
+        </div>
+        <div class="form-group col">
+            <label>E-MAIL</label>
+            <input class="form-control form-control-lg" placeholder="e-mail" style="width: 300px;"
+            name="email" #email="ngModel" [(ngModel)]="service.formData.emailAddress" required>
+        </div>
+        <div class="form-group col">
+            <label>SHEDULE</label>
+            <input class="form-control form-control-lg" placeholder="cron expression" style="width: 200px;"
+            name="cron" #cron="ngModel" [(ngModel)]="service.formData.cron" required>
+        </div>
+    </div>
+    <div class="col text-center" style="margin-top: 40px;">
+        <button class="btn btn-info btn-lg btn-block" type="submit" style="width: 200px;" [disabled]="form.invalid">EXECUTE</button>
+    </div>
+</form>
